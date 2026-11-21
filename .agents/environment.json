@@ -1,0 +1,3 @@
+{
+  "install": "if ! dpkg -s openjdk-17-jdk-headless >/dev/null 2>&1; then sudo apt-get update -qq && sudo DEBIAN_FRONTEND=noninteractive apt-get install -y -qq openjdk-17-jdk-headless; fi && if [ -n \"${ANDROID_HOME:-}\" ] && command -v sdkmanager >/dev/null 2>&1; then if [ ! -d \"$ANDROID_HOME/platforms/android-36\" ] || [ ! -d \"$ANDROID_HOME/build-tools/35.0.0\" ]; then yes | sdkmanager --licenses >/dev/null 2>&1 || true; sdkmanager \"platform-tools\" \"platforms;android-36\" \"build-tools;35.0.0\"; fi; fi && python3 -m pip install --no-input -q -e ./tools/mika-feishu -e ./tools/mika && (cd tools/relay && go mod download) && ./gradlew --version >/dev/null"
+}
